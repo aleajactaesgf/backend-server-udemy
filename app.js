@@ -17,6 +17,11 @@ app.use(bodyParser.json());
 var appRoutes = require('./routes/app');
 var usuarioRoutes = require('./routes/usuario');
 var loginRoutes = require('./routes/login');
+var hospitarRoutes = require('./routes/hospital');
+var medicoRoutes = require('./routes/medico');
+var busquedaRoutes = require('./routes/busqueda');
+var uploadRoutes = require('./routes/upload');
+var imagenesRoutes = require('./routes/imagenes');
 
 
 // Conexion a la BBDD
@@ -29,8 +34,15 @@ mongoose.connection.openUri('mongodb://localhost:27017/hospitalDB', (err, res) =
 
 // Rutas - Tipos de Peticiones a escuchar
 app.use('/usuario', usuarioRoutes);
+app.use('/hospital', hospitarRoutes);
+app.use('/medico', medicoRoutes);
 app.use('/login', loginRoutes);
+app.use('/busqueda', busquedaRoutes);
+app.use('/upload', uploadRoutes);
+app.use('/img', imagenesRoutes);
+// Esta debe ser la ultima ya que sino entraría por aquí siempre
 app.use('/', appRoutes);
+// Esta debe ser la ultima ya que sino entraría por aquí siempre
 
 
 
