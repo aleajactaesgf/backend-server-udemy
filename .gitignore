@@ -2,3 +2,4 @@
 
 node_modules/
 .jshintrc
+google-signin-demo/node_modules/
