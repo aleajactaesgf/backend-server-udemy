@@ -20,7 +20,7 @@ app.get('/', (req, res, next) => {
     desde = Number(desde); //  Se fuerza a que sea numero
 
     Usuario.find({}, // El {} para traer todo sin filtros
-            'nombre email img role') // Campos a traer, no tiene sentido traer el password
+            'nombre email img role google') // Campos a traer, no tiene sentido traer el password
         .skip(desde) // Se salte el numero de registro
         .limit(limit)
         .exec(
@@ -117,7 +117,7 @@ app.put('/:id', mdAutenticacion.verificaToke, (req, res) => {
 // =======================================================================================================
 //                                          CREAR UN NUEVO USUARIO
 // =======================================================================================================
-app.post('/', mdAutenticacion.verificaToke, (req, res) => {
+app.post('/', (req, res) => {
 
     var body = req.body; //SOLO FUNCIONA SI TENEMOS BODY PARSER INSTALADO
 
