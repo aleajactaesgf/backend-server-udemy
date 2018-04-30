@@ -29,3 +29,46 @@ exports.verificaToke = function(req, res, next) {
 
     });
 }
+
+// ======================================================================================================
+//                                      VERIFICAR ADMIN - MIDDLEWARE
+// ======================================================================================================
+
+exports.verificaADMIN_ROLE = function(req, res, next) {
+
+
+    var usuario = req.usuario;
+
+    if (usuario.role === 'ADMIN_ROLE') {
+        next();
+        return; // Este return es posible que no sea necesario
+    } else {
+        return res.status(401).json({
+            ok: false,
+            mensaje: 'Token incorrecto - No es administrador',
+            errors: { message: 'No es administrador' }
+        });
+    }
+}
+
+// ======================================================================================================
+//                                      VERIFICAR ADMIN ó MISMO USUARIO - MIDDLEWARE
+// ======================================================================================================
+
+exports.verificaADMIN_o_MismoUsuario = function(req, res, next) {
+
+
+    var usuario = req.usuario;
+    var id = req.params.id; // id que viene por parametro de la request
+
+    if (usuario.role === 'ADMIN_ROLE' || usuario._id === id) {
+        next();
+        return; // Este return es posible que no sea necesario
+    } else {
+        return res.status(401).json({
+            ok: false,
+            mensaje: 'Token incorrecto - No es administrador ni es el mismo usuario',
+            errors: { message: 'No es administrador' }
+        });
+    }
+}
